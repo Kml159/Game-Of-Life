@@ -14,10 +14,10 @@ const (
 	upperLimit = 100000
 )
 
-func Initialize(mat *matrix.Matrix, threshold float64){
+func Initialize(mat *matrix.Matrix, threshold float64) {
 	for i := range len(*mat) {
 		for j := range len((*mat)[0]) {
-			if util.RandomFloatBetween(0, 1) <= float64(threshold){
+			if util.RandomFloatBetween(0, 1) <= float64(threshold) {
 				(*mat)[i][j] = util.RandomIntBetween(1, upperLimit)
 			}
 		}

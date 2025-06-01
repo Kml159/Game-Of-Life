@@ -79,4 +79,3 @@ func (m1 Matrix) Print() {
 	}
 	fmt.Println()
 }
-

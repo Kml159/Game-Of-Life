@@ -3,6 +3,8 @@ package main
 import (
 	"GOL/matrix"
 	"GOL/operators"
+	"GOL/window"
+	"gioui.org/app"
 	"time"
 )
 
@@ -12,13 +14,20 @@ const (
 
 func main() {
 
-	mat := matrix.NewMatrix(10, 10)
-	operators.Initialize(&mat, 0.6)
+	mat := matrix.NewMatrix(50, 50) // xSize = ySize
+	operators.Initialize(&mat, 0.1)
 
-	for i := 0; i < 100; i++ {
-		operators.NextMatrix(&mat)
-		mat.Print()
-		time.Sleep(frameInterval * time.Millisecond)
-	}
+	w := window.StartWindow(&mat)
 
+	time.Sleep(1000 * time.Millisecond)
+
+	go func() {
+		for {
+			operators.NextMatrix(&mat)
+			w.Invalidate()
+			time.Sleep(frameInterval * time.Millisecond)
+		}
+	}()
+
+	app.Main()
 }
