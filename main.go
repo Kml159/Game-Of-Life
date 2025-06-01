@@ -9,13 +9,14 @@ import (
 )
 
 const (
-	frameInterval = 100
+	frameIntervalInMilisec = 100
+	populationDensity = 0.1
 )
 
 func main() {
 
 	mat := matrix.NewMatrix(50, 50) // xSize = ySize
-	operators.Initialize(&mat, 0.1)
+	operators.Initialize(&mat, populationDensity)
 
 	w := window.StartWindow(&mat)
 
@@ -25,7 +26,7 @@ func main() {
 		for {
 			operators.NextMatrix(&mat)
 			w.Invalidate()
-			time.Sleep(frameInterval * time.Millisecond)
+			time.Sleep(frameIntervalInMilisec * time.Millisecond)
 		}
 	}()
 
