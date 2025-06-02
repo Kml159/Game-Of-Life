@@ -72,17 +72,17 @@ func Next(mat *matrix.Matrix, i int, j int) int {
 	liveNeighbors := LiveNeighborsAmount(mat, i, j)
 	if (*mat)[i][j] != 0 { // alive
 
-		if liveNeighbors < 2 { // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+		if liveNeighbors < 2 { // Any live cell with fewer than two live neighbors dies, as if by underpopulation.
 			return 0
-		} else if liveNeighbors == 2 || liveNeighbors == 3 { // Any live cell with two or three live neighbours lives on to the next generation.
+		} else if liveNeighbors == 2 || liveNeighbors == 3 { // Any live cell with two or three live neighbors lives on to the next generation.
 			return (*mat)[i][j]
-		} else if liveNeighbors > 3 { // Any live cell with more than three live neighbours dies, as if by overpopulation.
+		} else if liveNeighbors > 3 { // Any live cell with more than three live neighbors dies, as if by overpopulation.
 			return 0
 		}
 
 	} else { // dead
 
-		// Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+		// Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 		if liveNeighbors == 3 {
 			return util.RandomIntBetween(1, upperLimit)
 		}
@@ -91,9 +91,11 @@ func Next(mat *matrix.Matrix, i int, j int) int {
 }
 
 func NextMatrix(mat *matrix.Matrix) {
+	nextMat := (*mat)
 	for i := range len(*mat) {
 		for j := range len((*mat)[0]) {
-			(*mat)[i][j] = Next(mat, i, j)
+			nextMat[i][j] = Next(mat, i, j)
 		}
 	}
+	mat.CopyFrom(&nextMat)
 }

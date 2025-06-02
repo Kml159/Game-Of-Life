@@ -22,6 +22,12 @@ func NewMatrixFrom(rows ...[]int) Matrix {
 	return m
 }
 
+func (m1 *Matrix) CopyFrom(mat *Matrix) {
+    for i := 0; i < len(*mat); i++ {
+        copy((*m1)[i], (*mat)[i])
+    }
+}
+
 func Mult(m1 Matrix, m2 Matrix) (Matrix, error) {
 	y1 := len(m1)
 	x2 := len(m2[0])
@@ -79,3 +85,5 @@ func (m1 Matrix) Print() {
 	}
 	fmt.Println()
 }
+
+
