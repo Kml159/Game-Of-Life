@@ -20,8 +20,6 @@ func main() {
 
 	w := window.StartWindow(&mat)
 
-	time.Sleep(1000 * time.Millisecond)
-
 	go func() {
 		for {
 			operators.NextMatrix(&mat)

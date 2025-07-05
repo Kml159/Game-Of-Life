@@ -91,7 +91,7 @@ func Next(mat *matrix.Matrix, i int, j int) int {
 }
 
 func NextMatrix(mat *matrix.Matrix) {
-	nextMat := (*mat)
+	nextMat := matrix.NewMatrix(len(*mat), len((*mat)[0]))
 	for i := range len(*mat) {
 		for j := range len((*mat)[0]) {
 			nextMat[i][j] = Next(mat, i, j)
